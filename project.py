@@ -27,7 +27,9 @@ print(' ')
 print("9:. Develop a function which open a file and lets you edit its content and saves it.")
 print(' ')
 print("10. rewrite")
-print("11. ")
+print("11. append text")
+print(" 12 search")
+print("13.moving ")
 # current_directory = os.getcwd()
 
 # with open("db.txt", "w") as file:
@@ -81,7 +83,7 @@ def move_files_dirs(name_input,place_input):
 
 rep = True
 while rep==True:
-    user_input = int(input("Choose one of options(number:1-12) :"))
+    user_input = int(input("Choose one of options(number:1-13) :"))
 
     if user_input == "exit":
         rep = False
@@ -224,14 +226,23 @@ while rep==True:
         cur = pathlib.Path.cwd()
         print(f"Your current directory is: {cur}") 
 
+# 9. read
+
     elif user_input == 9 :
         user_file = input("Enter the new file path: ")
         cur_path = pathlib.Path.cwd()
         new_file = pathlib.Path(user_file)
         cur_p = cur_path / user_file
         print(cur_p)
+        
+        input_num = int(input("Enter number of lines: "))
+        f= open(cur_p,"r")
+
+        for i in range(1,input_num+1):
+            print(f.readline())
+        
  
-        read_files(cur_p)
+        # read_files(cur_p)
 
        
     #  10 rewrite
@@ -275,6 +286,7 @@ while rep==True:
             print("Not found")
 
 
+# 13 move
 
     elif user_input == 13 :
         name_input = input("Enter the name of the file or directory: ")
