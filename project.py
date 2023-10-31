@@ -3,7 +3,6 @@ import os
 import shutil
 
 
-
 # THE OPTIONS:
 
 print("Functions of the program:")
@@ -37,106 +36,100 @@ print("# 13.MOVING file(s)  and directory (es) from one place to another one")
 # Functions
 
 
-def read_files(path_file):
+def read_files(user_file):
     try:
-        with open(path_file, mode = 'r') as file:
-            content = file.read()
-            print("Content:")
-            print(content)
-              
+        cur_path = pathlib.Path.cwd()
+        new_file = pathlib.Path(user_file)
+        cur_p = cur_path / new_file
+        print(cur_p)
+
+        input_num = int(input("Enter number of lines: "))
+        f = open(cur_p, "r")
+
+        for i in range(1, input_num+1):
+            print(f.readline())
+
     except FileNotFoundError:
-        print("FileNotFoundError")    
+        print("FileNotFoundError")
+
 
 def write_files(path_file):
     try:
-        with open(path_file,"w") as file:
+        with open(path_file, "w") as file:
             content = file.write(input("Enter data: "))
             print("Content:")
-            print(content)    
-            open(path_file,"a").close()
+            print(content)
+            open(path_file, "a").close()
     except FileNotFoundError:
-        print("FileNotFoundError")             
+        print("FileNotFoundError")
+
 
 def append_files_text(path_file):
     try:
-        with open(path_file,"a") as file:
+        with open(path_file, "a") as file:
 
             content = file.write(input("Enter data: "))
             print("Content:")
-            print(content)    
-            open(path_file,"a").close()
-            
-            
+            print(content)
+            open(path_file, "a").close()
+
     except FileNotFoundError:
         print("FileNotFoundError")
-        
 
-def move_files_dirs(name_input,place_input):
+
+def move_files_dirs(name_input, place_input):
     try:
-        
+
         name_input_path = pathlib.Path(name_input)
         place_input_path = pathlib.Path(place_input)
         cur_cwd = pathlib.Path.cwd()
         path_obj = cur_cwd / name_input_path
         path_place = cur_cwd / place_input_path
         move_place = shutil.move(path_obj, path_place)
-        return(move_place) 
+        return (move_place)
     except FileNotFoundError:
-        print("FileNotFoundError")   
+        print("FileNotFoundError")
 
 
-def search_in_file(user_file,user_word):
-       
-        cur_path = pathlib.Path.cwd()
-        new_file = pathlib.Path(user_file)
-        cur_p = cur_path / user_file
-        print(cur_p)     
+def search_in_file(user_file, user_word):
+
+    cur_path = pathlib.Path.cwd()
+    new_file = pathlib.Path(user_file)
+    cur_p = cur_path / user_file
+    print(cur_p)
+    print(user_word)
+
+    file_12 = open(cur_p, 'r')
+    text = file_12.read()
+    if user_word in text:
         print(user_word)
-        
-        file_12=open(cur_p,'r')
-        text=file_12.read()
-        if user_word in text:
-            print(user_word)
-        else:
-            print("Not found")
-
-
-
+    else:
+        print("Not found")
 
 
 rep = True
-while rep==True:
+while rep == True:
     user_input = int(input("Choose one of options(number:1-13) :"))
 
     if user_input == "exit":
         rep = False
 
-
- 
-
     # 1. List files in a directory
 
-
-
     if user_input == 1:
-        try :
+        try:
             line_directory = pathlib.Path.cwd()
-          
+
             for i in line_directory.iterdir():
                 file_1 = i
-            
-                print(i,end='')
-                print(" Size: ",os.path.getsize(file_1),end=" ",)
-                print(" Time: ",os.path.getatime(file_1),end=" \n ")
+
+                print(i, end='')
+                print(" Size: ", os.path.getsize(file_1), end=" ",)
+                print(" Time: ", os.path.getatime(file_1), end=" \n ")
         except:
             print("Your are wrong")
 
-
-
-
     # 2. Create a new file
-
-
 
     elif user_input == 2:
         try:
@@ -145,17 +138,13 @@ while rep==True:
             new_file = line_file / f"{user_input}"
             if new_file.exists() == True:
                 print("You file has in this directory ")
-            else :
+            else:
                 new_file.touch()
                 print(new_file)
         except:
             print("Your are wrong")
 
-
-
-
-
-    # 3. Create a new directory        
+    # 3. Create a new directory
 
     elif user_input == 3:
         try:
@@ -164,16 +153,13 @@ while rep==True:
             new_directory = line_directory / f"{user_input}"
             if new_directory.exists() == True:
                 print("You directory exist in this place")
-            else :
+            else:
                 new_directory.mkdir()
                 print(new_directory)
         except:
             print("Your are wrong")
 
-
-
-
-    # 4. Delete a file       
+    # 4. Delete a file
 
     elif user_input == 4:
         try:
@@ -187,14 +173,12 @@ while rep==True:
                 if user_agree == 'YES':
                     new_file.unlink()
                     print(line_file)
-                else :
+                else:
                     pass
         except:
             print("Your are wrong")
 
-
-
-    # "5. Delete a directory 
+    # "5. Delete a directory
 
     elif user_input == 5:
         try:
@@ -208,24 +192,21 @@ while rep==True:
                 if user_agree == 'YES':
                     new_directory.rmdir()
                     print(line_directory)
-                else :
+                else:
                     pass
         except:
             print("Your are wrong")
 
-
-
-
     # 6. Rename a file or directory
-
-
 
     elif user_input == 6:
         try:
-            user_input = input("Enter name your directory or file, that you used :")
+            user_input = input(
+                "Enter name your directory or file, that you used :")
             line_directory_file = pathlib.Path.cwd()
             last_directory = line_directory_file / user_input
-            user_input_new_name = input("Enter a new name of your directory or file:")
+            user_input_new_name = input(
+                "Enter a new name of your directory or file:")
             new_directory_file = line_directory_file / user_input_new_name
 
             if last_directory.exists() == True:
@@ -235,17 +216,14 @@ while rep==True:
                 if user_agree == 'YES':
                     last_directory.replace(new_directory_file)
                     print(line_directory_file)
-                else :
+                else:
                     pass
         except:
             print("Your are wrong")
 
-
-
-
     # 7. Change a folder()
 
-    elif user_input == 7 :
+    elif user_input == 7:
         old_dir = pathlib.Path.cwd()
         print(f"Your current directory is: {old_dir}")
 
@@ -262,75 +240,49 @@ while rep==True:
             else:
                 print(f"The path '{user_new_place}' is not a valid directory.")
         else:
-            pass   
-
-
-
-
+            pass
 
         # Show CWD
 
-
-    elif user_input == 8 :
+    elif user_input == 8:
         cur = pathlib.Path.cwd()
-        print(f"Your current directory is: {cur}") 
-
+        print(f"Your current directory is: {cur}")
 
 
 # 9. read
 
-    elif user_input == 9 :
+    elif user_input == 9:
         user_file = input("Enter the new file path: ")
-        cur_path = pathlib.Path.cwd()
-        new_file = pathlib.Path(user_file)
-        cur_p = cur_path / user_file
-        print(cur_p)
-        
-        input_num = int(input("Enter number of lines: "))
-        f= open(cur_p,"r")
 
-        for i in range(1,input_num+1):
-            print(f.readline())
-        
- 
-      
+        print(read_files(user_file))
 
-       
+
 # 10. Rewriting all information inside the file
 
-
-    elif user_input == 10 : 
+    elif user_input == 10:
         user_file = input("Enter the new file path: ")
 
         print(write_files(user_file))
 
 # 11. Appending text inside file.
 
-    elif user_input == 11 : 
+    elif user_input == 11:
         user_file = input("Enter the new file path: ")
-        
+
         print(append_files_text(user_file))
 
-        
+
 # 12. Search functionality inside a selected folder
 
+    elif user_input == 12:
+        search_in_file(user_file=input("Enter the new file path: "),
+                       user_word=input("Enter the word for a search: "))
 
-    elif user_input == 12 :
-        search_in_file(user_file = input("Enter the new file path: "),user_word = input("Enter the word for a search: "))
-     
 
 # 13.MOVING file(s)  and directory (es) from one place to another one
 
-    elif user_input == 13 :
+    elif user_input == 13:
         name_input = input("Enter the name of the file or directory: ")
         place_input = input("Enter the place to move object: ")
 
-        move_files_dirs(name_input,place_input)    
-
-                 
-           
-
-
-
-
-    
+        move_files_dirs(name_input, place_input)
