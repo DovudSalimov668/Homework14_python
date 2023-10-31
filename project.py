@@ -2,7 +2,7 @@ import pathlib
 import os
 import shutil
 
-# def action_options(numer_of_opt):
+
 
 # THE OPTIONS:
 
@@ -26,18 +26,20 @@ print("8. Show cwd")
 print(' ')
 print("9:. Develop a function which open a file and lets you edit its content and saves it.")
 print(' ')
-print("10. rewrite")
-print("11. append text")
-print(" 12 search")
-print("13.moving ")
-# current_directory = os.getcwd()
+print("10. Rewriting all information inside the file")
+print(' ')
+print("11. Appending text inside file.")
+print(' ')
+print("12. Search functionality inside a selected folder")
+print(' ')
+print("# 13.MOVING file(s)  and directory (es) from one place to another one")
 
-# with open("db.txt", "w") as file:
-#     file.write(current_directory)
+# Functions
+
 
 def read_files(path_file):
     try:
-        with open(path_file, mode = 'r', encoding='utf-8') as file:
+        with open(path_file, mode = 'r') as file:
             content = file.read()
             print("Content:")
             print(content)
@@ -64,6 +66,7 @@ def append_files_text(path_file):
             print(content)    
             open(path_file,"a").close()
             
+            
     except FileNotFoundError:
         print("FileNotFoundError")
         
@@ -79,7 +82,27 @@ def move_files_dirs(name_input,place_input):
         move_place = shutil.move(path_obj, path_place)
         return(move_place) 
     except FileNotFoundError:
-        print("FileNotFoundError")         
+        print("FileNotFoundError")   
+
+
+def search_in_file(user_file,user_word):
+       
+        cur_path = pathlib.Path.cwd()
+        new_file = pathlib.Path(user_file)
+        cur_p = cur_path / user_file
+        print(cur_p)     
+        print(user_word)
+        
+        file_12=open(cur_p,'r')
+        text=file_12.read()
+        if user_word in text:
+            print(user_word)
+        else:
+            print("Not found")
+
+
+
+
 
 rep = True
 while rep==True:
@@ -93,13 +116,12 @@ while rep==True:
 
     # 1. List files in a directory
 
+
+
     if user_input == 1:
         try :
             line_directory = pathlib.Path.cwd()
-            # for i in line_directory.iterdir():
-            #     print(i, i.stat(),"\n")
-            # print(" ")    
-            # print(os.listdir(line_directory))
+          
             for i in line_directory.iterdir():
                 file_1 = i
             
@@ -109,7 +131,12 @@ while rep==True:
         except:
             print("Your are wrong")
 
+
+
+
     # 2. Create a new file
+
+
 
     elif user_input == 2:
         try:
@@ -123,6 +150,10 @@ while rep==True:
                 print(new_file)
         except:
             print("Your are wrong")
+
+
+
+
 
     # 3. Create a new directory        
 
@@ -138,6 +169,9 @@ while rep==True:
                 print(new_directory)
         except:
             print("Your are wrong")
+
+
+
 
     # 4. Delete a file       
 
@@ -158,6 +192,8 @@ while rep==True:
         except:
             print("Your are wrong")
 
+
+
     # "5. Delete a directory 
 
     elif user_input == 5:
@@ -177,7 +213,12 @@ while rep==True:
         except:
             print("Your are wrong")
 
+
+
+
     # 6. Rename a file or directory
+
+
 
     elif user_input == 6:
         try:
@@ -198,6 +239,9 @@ while rep==True:
                     pass
         except:
             print("Your are wrong")
+
+
+
 
     # 7. Change a folder()
 
@@ -220,11 +264,18 @@ while rep==True:
         else:
             pass   
 
-        # 8 cwd
+
+
+
+
+        # Show CWD
+
 
     elif user_input == 8 :
         cur = pathlib.Path.cwd()
         print(f"Your current directory is: {cur}") 
+
+
 
 # 9. read
 
@@ -242,51 +293,33 @@ while rep==True:
             print(f.readline())
         
  
-        # read_files(cur_p)
+      
 
        
-    #  10 rewrite
+# 10. Rewriting all information inside the file
 
 
     elif user_input == 10 : 
         user_file = input("Enter the new file path: ")
-        cur_path = pathlib.Path.cwd()
-        new_file = pathlib.Path(user_file)
-        cur_p = cur_path / user_file
-        print(cur_p)
-        f = open("demofile2.txt", "a")
+
         print(write_files(user_file))
 
-#11 append tetxt
+# 11. Appending text inside file.
 
     elif user_input == 11 : 
         user_file = input("Enter the new file path: ")
-        cur_path = pathlib.Path.cwd()
-        new_file = pathlib.Path(user_file)
-        cur_p = cur_path / user_file
-        print(cur_p)
-        f = open(cur_p, "a")
+        
         print(append_files_text(user_file))
 
-# 12 search
-    elif user_input == 12 :
-        user_file = input("Enter the new file path: ")
-        user_word = input("Enter the word for a search: ")
-        cur_path = pathlib.Path.cwd()
-        new_file = pathlib.Path(user_file)
-        cur_p = cur_path / user_file
-        print(cur_p)     
-        print(user_word)
         
-        file_12=open(cur_p,'r')
-        text=file_12.read()
-        if user_word in text:
-            print(user_word)
-        else:
-            print("Not found")
+# 12. Search functionality inside a selected folder
 
 
-# 13 move
+    elif user_input == 12 :
+        search_in_file(user_file = input("Enter the new file path: "),user_word = input("Enter the word for a search: "))
+     
+
+# 13.MOVING file(s)  and directory (es) from one place to another one
 
     elif user_input == 13 :
         name_input = input("Enter the name of the file or directory: ")

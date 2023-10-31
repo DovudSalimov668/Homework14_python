@@ -14,7 +14,7 @@ syms_1 = input("Symbols:")
 big_1 = input("Big:")
 small_1 = input("Small:")
 numbers_1 = (input("Numbers:"))
-# var = int(input("How many variations do you want: "))
+
 
 for i in range(lengh_1):
     if small_1=='yes':
