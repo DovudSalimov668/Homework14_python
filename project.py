@@ -1,6 +1,7 @@
 import pathlib
 import os
 import shutil
+from help_functions import FileManigment,UserInput
 
 
 # THE OPTIONS:
@@ -95,7 +96,7 @@ def search_in_file(user_file, user_word):
 
     cur_path = pathlib.Path.cwd()
     new_file = pathlib.Path(user_file)
-    cur_p = cur_path / user_file
+    cur_p = cur_path / new_file
     print(cur_p)
     print(user_word)
 
@@ -104,7 +105,7 @@ def search_in_file(user_file, user_word):
     if user_word in text:
         print(user_word)
     else:
-        print("Not found")
+        pass
 
 
 rep = True
@@ -113,6 +114,8 @@ while rep == True:
 
     if user_input == "exit":
         rep = False
+    else:
+        rep = True   
 
     # 1. List files in a directory
 
@@ -132,51 +135,34 @@ while rep == True:
     # 2. Create a new file
 
     elif user_input == 2:
-        try:
-            user_input = input("Enter name your file :")
-            line_file = pathlib.Path.cwd()
-            new_file = line_file / f"{user_input}"
-            if new_file.exists() == True:
-                print("You file has in this directory ")
-            else:
-                new_file.touch()
-                print(new_file)
-        except:
-            print("Your are wrong")
+        FileManigment(UserInput()).create_file()
+        
 
     # 3. Create a new directory
-
+              
     elif user_input == 3:
-        try:
-            user_input = input("Enter name your directory :")
-            line_directory = pathlib.Path.cwd()
-            new_directory = line_directory / f"{user_input}"
-            if new_directory.exists() == True:
-                print("You directory exist in this place")
-            else:
-                new_directory.mkdir()
-                print(new_directory)
-        except:
-            print("Your are wrong")
+        FileManigment(UserInput()).create_directory()
+       
 
     # 4. Delete a file
 
     elif user_input == 4:
-        try:
-            user_input = input("Enter name your file :")
-            line_file = pathlib.Path.cwd()
-            new_file = line_file / f"{user_input}"
-            if new_file.exists() == True:
-                print("You file has in this directory ")
-                print("Are sure , that do you want to delite this file")
-                user_agree = input("YES OR NO\n")
-                if user_agree == 'YES':
-                    new_file.unlink()
-                    print(line_file)
-                else:
-                    pass
-        except:
-            print("Your are wrong")
+        FileManigment
+        # try:
+        #     user_input = input("Enter name your file :")
+        #     line_file = pathlib.Path.cwd()
+        #     new_file = line_file / f"{user_input}"
+        #     if new_file.exists() == True:
+        #         print("You file has in this directory ")
+        #         print("Are sure , that do you want to delite this file")
+        #         user_agree = input("YES OR NO\n")
+        #         if user_agree == 'YES':
+        #             new_file.unlink()
+        #             print(line_file)
+        #         else:   
+        #             pass
+        # except:
+        #     print("Your are wrong")
 
     # "5. Delete a directory
 
