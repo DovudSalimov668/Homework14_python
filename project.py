@@ -147,65 +147,41 @@ while rep == True:
     # 4. Delete a file
 
     elif user_input == 4:
-        FileManigment
-        # try:
-        #     user_input = input("Enter name your file :")
-        #     line_file = pathlib.Path.cwd()
-        #     new_file = line_file / f"{user_input}"
-        #     if new_file.exists() == True:
-        #         print("You file has in this directory ")
-        #         print("Are sure , that do you want to delite this file")
-        #         user_agree = input("YES OR NO\n")
-        #         if user_agree == 'YES':
-        #             new_file.unlink()
-        #             print(line_file)
-        #         else:   
-        #             pass
-        # except:
-        #     print("Your are wrong")
+        FileManigment(UserInput()).delete_file()
+    
 
     # "5. Delete a directory
 
     elif user_input == 5:
-        try:
-            user_input = input("Enter name your directory :")
-            line_directory = pathlib.Path.cwd()
-            new_directory = line_directory / f"{user_input}"
-            if new_directory.exists() == True:
-                print("You directory existed in this place")
-                print("Are sure , that do you want to delite this directory")
-                user_agree = input("YES OR NO\n")
-                if user_agree == 'YES':
-                    new_directory.rmdir()
-                    print(line_directory)
-                else:
-                    pass
-        except:
-            print("Your are wrong")
+        FileManigment(UserInput()).delete_directory()
+
+
 
     # 6. Rename a file or directory
 
     elif user_input == 6:
-        try:
-            user_input = input(
-                "Enter name your directory or file, that you used :")
-            line_directory_file = pathlib.Path.cwd()
-            last_directory = line_directory_file / user_input
-            user_input_new_name = input(
-                "Enter a new name of your directory or file:")
-            new_directory_file = line_directory_file / user_input_new_name
 
-            if last_directory.exists() == True:
-                print("You directory or file existed in this place")
-                print("Are sure , that do you want to rename this directory or file")
-                user_agree = input("YES OR NO\n")
-                if user_agree == 'YES':
-                    last_directory.replace(new_directory_file)
-                    print(line_directory_file)
-                else:
-                    pass
-        except:
-            print("Your are wrong")
+        FileManigment(UserInput()).rename_file_or_directory()
+        # try:
+        #     user_input = input(
+        #         "Enter name your directory or file, that you used :")
+        #     line_directory_file = pathlib.Path.cwd()
+        #     last_directory = line_directory_file / user_input
+        #     user_input_new_name = input(
+        #         "Enter a new name of your directory or file:")
+        #     new_directory_file = line_directory_file / user_input_new_name
+
+        #     if last_directory.exists() == True:
+        #         print("You directory or file existed in this place")
+        #         print("Are sure , that do you want to rename this directory or file")
+        #         user_agree = input("YES OR NO\n")
+        #         if user_agree == 'YES':
+        #             last_directory.replace(new_directory_file)
+        #             print(line_directory_file)
+        #         else:
+        #             pass
+        # except:
+        #     print("Your are wrong")
 
     # 7. Change a folder()
 

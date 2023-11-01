@@ -91,4 +91,4 @@ class FileManigment:
                     print("Your are wrong")
                 
                        
-
+FileManigment(UserInput()).delete_directory()
